@@ -1,0 +1,16 @@
+
+Style  --（DataSheets）-> DataSheet
+
+ 如：样品阶段，已被批准的 成衣BOM
+DataSheets.filter(`Node Type` == "ApparelBOM" || `Node Type` == "MaterialBOM").join(PhaseCurrentRevisions["Sample"]).
+filter(string(State)=="Revision.State:APPROVED")
+
+
+PurchasedOrder---> PurchaseTerms
+
+
+	
+__Parent__.__Parent__.ProductSourcing.ProductionQuote.__Parent__.Supplier
+
+PurchasedOrderProducts.filter(attr(__Parent__, "Node Type") == "CustomerPurchaseOrder" && __Parent__.State != enum("PurchasedOrderState", "Abandoned")).sum(Quantity).double()
+
